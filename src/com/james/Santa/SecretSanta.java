@@ -28,8 +28,22 @@ public class SecretSanta {
         ArrayList<String> shuffledEmails = shuffle(emails);
         System.out.println(shuffledNames);
         System.out.println(shuffledEmails);
-        boolean same = Equal(shuffledNames, shuffledEmails)
-        if ()
+        // first check
+        
+        boolean equal = Equal(names, emails, shuffledNames, shuffledEmails);
+        while(equal == false) {
+            shuffledNames = shuffle(names);
+            shuffledEmails = shuffle(emails);
+            equal = Equal(names, emails, shuffledNames, shuffledEmails);
+        }
+        System.out.println(shuffledNames);
+        System.out.println(shuffledEmails);
+        System.out.println(equal);
+        for (int i = 0; i < shuffledEmails.size(); i++) {
+            String email = shuffledEmails.get(i);
+            String name = shuffledNames.get(i);
+            System.out.println("An email is to be sent to " + email + " and they will be asked to buy " + name + " a gift");
+        }
     }
     public static String ending(int number) {
         if (number == 1) {
@@ -56,17 +70,17 @@ public class SecretSanta {
         shuffled.add(currentList.remove(0));
         return shuffled;
     }
-    public static boolean Equal(ArrayList<String> list1, ArrayList<String> list2) {
-        if(list1.size ! = list2.size()) {
-            return false;
-        }
-        for (int i = 0; i < list1.size(); i++) {
-            String current1 = list1.get(i);
-            String current2 = list2.get(i);
-            if (!current1.equals(current2)) {
+    public static boolean Equal(ArrayList<String> list1, ArrayList<String> list2, ArrayList<String> list3, ArrayList<String> list4) {
+        for (int i = 0; i < list3.size(); i++) {
+            String name = list1.get(i);
+            String email = list2.get(i);
+            int newPositionName = list3.indexOf(name);
+            int newPositionEmail = list4.indexOf(email);
+            if (newPositionName == newPositionEmail) {
                 return false;
             }
         }
         return true;
     }
+
 }
